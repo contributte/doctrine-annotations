@@ -10,7 +10,6 @@
 
 At first you should register `AnnotationsExtension` at your config file.
 
-
 ```yaml
 extensions:
     annotations: Nettrine\Annotations\DI\AnnotationsExtension
@@ -29,6 +28,8 @@ annotations:
 ## Example
 
 Create own annotation. Specify your targets `CLASS, METHOD, PROPERTY, ALL, ANNOTATION`.
+
+[More you can find at official documentation.](http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html#annotation-classes)
 
 ```php
 use Doctrine\Common\Annotations\Annotation;
@@ -74,7 +75,7 @@ class SampleClass
 }
 ```
 
-Now you can use Reader service from your Container. 
+Now you can use `Reader` service from your Container. 
 
 ```php
 /** @var Doctrine\Common\Annotations\Reader @inject */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Nettrine\Annotations\Reader\Files;
+namespace Tests\Reader\Files;
 
 use Doctrine\Common\Annotations\Annotation;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Nettrine\Annotations\Reader;
+namespace Tests\Reader;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;
@@ -12,8 +12,8 @@ use ReflectionClass;
 use Tester\Assert;
 use Tester\FileMock;
 use Tester\TestCase;
-use Tests\Nettrine\Annotations\Reader\Files\SampleAnnotation;
-use Tests\Nettrine\Annotations\Reader\Files\SampleClass;
+use Tests\Reader\Files\SampleAnnotation;
+use Tests\Reader\Files\SampleClass;
 
 require_once __DIR__ . '/../../bootstrap.php';
 

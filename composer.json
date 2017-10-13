@@ -34,7 +34,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Nettrine\\Annotations\\": "tests/cases/"
+      "Tests\\": "tests/cases/"
     }
   },
   "scripts": {
