@@ -1,15 +1,9 @@
 {
   "name": "nettrine/annotations",
-  "description": "Annotations",
-  "keywords": [
-    "nette",
-    "doctrine",
-    "annotations"
-  ],
+  "description": "Doctrine Annotations for Nette Framework",
+  "keywords": ["nette", "doctrine", "annotations"],
   "type": "library",
-  "license": [
-    "MIT"
-  ],
+  "license": ["MIT"],
   "homepage": "https://github.com/nettrine/annotations",
   "authors": [
     {
