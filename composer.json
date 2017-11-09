@@ -15,7 +15,8 @@
     "php": ">=5.6",
     "doctrine/annotations": "1.4.0",
     "nette/di": "^2.4.9",
-    "nette/utils": "^2.4.8"
+    "nette/utils": "^2.4.8",
+    "doctrine/cache": "~1.6.2"
   },
   "require-dev": {
     "ninjify/qa": "~0.4.0",
