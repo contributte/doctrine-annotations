@@ -30,6 +30,7 @@ class ReaderTest extends TestCase
 	{
 		$loader = new ContainerLoader(TEMP_DIR, TRUE);
 		$class = $loader->load(function (Compiler $compiler) {
+			$compiler->addConfig(['parameters' => ['tempDir' => TEMP_DIR]]);
 			$compiler->addExtension('annotations', new AnnotationsExtension());
 			$compiler->loadConfig(FileMock::create('
 			annotations:
