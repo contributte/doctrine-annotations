@@ -33,7 +33,7 @@ class AnnotationsExtension extends CompilerExtension
 
 		$reader = $builder->addDefinition($this->prefix('annotationReader'))
 			->setClass(AnnotationReader::class)
-			->setAutowired(FALSE);
+			->setAutowired(TRUE);
 
 		Validators::assertField($config, 'ignore', 'array');
 		foreach ($config['ignore'] as $annotationName) {
