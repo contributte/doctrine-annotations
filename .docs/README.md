@@ -17,12 +17,26 @@ extensions:
 
 ## Configuration
 
+```yaml
+annotations:
+    debug: %debugMode%
+    ignore: []
+    cache: Doctrine\Common\Cache\FilesystemCache
+```
+
 Optionally you can configure ignored annotations:
 
 ```yaml
 annotations:
     ignore:
         - someIgnoredAnnotation
+```
+
+Refer already defined cache (instance of `Doctrine\Common\Cache`).
+
+```yaml
+annotations:
+    cache: @mycache
 ```
 
 ## Example

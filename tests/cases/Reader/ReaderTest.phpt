@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Tests\Reader;
+namespace Tests\Nettrine\Annotations\Cases\Reader;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;
@@ -12,8 +12,8 @@ use ReflectionClass;
 use Tester\Assert;
 use Tester\FileMock;
 use Tester\TestCase;
-use Tests\Reader\Files\SampleAnnotation;
-use Tests\Reader\Files\SampleClass;
+use Tests\Nettrine\Annotations\Fixtures\SampleAnnotation;
+use Tests\Nettrine\Annotations\Fixtures\SampleClass;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -23,13 +23,10 @@ require_once __DIR__ . '/../../bootstrap.php';
 class ReaderTest extends TestCase
 {
 
-	/**
-	 * @return void
-	 */
-	public function testClassAnnotations()
+	public function testClassAnnotations(): void
 	{
-		$loader = new ContainerLoader(TEMP_DIR, TRUE);
-		$class = $loader->load(function (Compiler $compiler) {
+		$loader = new ContainerLoader(TEMP_DIR, true);
+		$class = $loader->load(function (Compiler $compiler): void {
 			$compiler->addConfig(['parameters' => ['tempDir' => TEMP_DIR]]);
 			$compiler->addExtension('annotations', new AnnotationsExtension());
 			$compiler->loadConfig(FileMock::create('
@@ -39,7 +36,7 @@ class ReaderTest extends TestCase
 		', 'neon'));
 		}, '1a');
 		/** @var Container $container */
-		$container = new $class;
+		$container = new $class();
 
 		/** @var AnnotationReader $reader */
 		$reader = $container->getByType(Reader::class);

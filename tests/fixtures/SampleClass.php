@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Tests\Reader\Files;
+namespace Tests\Nettrine\Annotations\Fixtures;
 
 /**
  * @ignoredAnnotation

@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Tests\Reader\Files;
+namespace Tests\Nettrine\Annotations\Fixtures;
 
 use Doctrine\Common\Annotations\Annotation;
 
@@ -19,13 +19,10 @@ class SampleAnnotation
 	 */
 	public function __construct(array $values)
 	{
-		$this->value = isset($values['value']) ? $values['value'] : NULL;
+		$this->value = $values['value'] ?? null;
 	}
 
-	/**
-	 * @return string|NULL
-	 */
-	public function getValue()
+	public function getValue(): ?string
 	{
 		return $this->value;
 	}

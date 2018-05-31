@@ -1,27 +1,51 @@
-<?php
+<?php declare(strict_types = 1);
 
-/**
- * Test: DI\AnnotationsExtension
- */
+namespace Tests\Nettrine\Annotations\Cases\DI;
 
+use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Common\Cache\FilesystemCache;
 use Nette\DI\Compiler;
 use Nette\DI\Container;
 use Nette\DI\ContainerLoader;
 use Nettrine\Annotations\DI\AnnotationsExtension;
 use Tester\Assert;
+use Tester\FileMock;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-test(function () {
-	$loader = new ContainerLoader(TEMP_DIR, TRUE);
-	$class = $loader->load(function (Compiler $compiler) {
+test(function (): void {
+	$loader = new ContainerLoader(TEMP_DIR, true);
+	$class = $loader->load(function (Compiler $compiler): void {
 		//Required services and params
 		$compiler->addConfig(['parameters' => ['tempDir' => TEMP_DIR]]);
 		$compiler->addExtension('annotations', new AnnotationsExtension());
-	}, '1a');
+	}, '1');
 
 	/** @var Container $container */
-	$container = new $class;
-	Assert::type(Reader::class, $container->getByType(Reader::class));
+	$container = new $class();
+	Assert::type(CachedReader::class, $container->getByType(Reader::class));
+	Assert::type(FilesystemCache::class, $container->getService('annotations.cache'));
+});
+
+test(function (): void {
+	$loader = new ContainerLoader(TEMP_DIR, true);
+	$class = $loader->load(function (Compiler $compiler): void {
+		//Required services and params
+		$compiler->addConfig(['parameters' => ['tempDir' => TEMP_DIR]]);
+		$compiler->addExtension('annotations', new AnnotationsExtension());
+		$compiler->loadConfig(FileMock::create('
+		services:
+			mycache: Doctrine\Common\Cache\ArrayCache
+		
+		annotations:
+			cache: @mycache
+		', 'neon'));
+	}, '2');
+
+	/** @var Container $container */
+	$container = new $class();
+	Assert::type(CachedReader::class, $container->getByType(Reader::class));
+	Assert::type(ArrayCache::class, $container->getService('annotations.cache'));
 });
