@@ -50,7 +50,7 @@ class AnnotationsExtension extends CompilerExtension
 				2 => $config['debug'],
 			]);
 
-		AnnotationRegistry::registerLoader('class_exists');
+		AnnotationRegistry::registerUniqueLoader('class_exists');
 	}
 
 	protected function loadCacheConfiguration(): void
@@ -83,7 +83,7 @@ class AnnotationsExtension extends CompilerExtension
 	{
 		$initialize = $classType->getMethod('initialize');
 		$original = (string) $initialize->getBody();
-		$initialize->setBody('?::registerLoader("class_exists");' . "\n", [new PhpLiteral(AnnotationRegistry::class)]);
+		$initialize->setBody('?::registerUniqueLoader("class_exists");' . "\n", [new PhpLiteral(AnnotationRegistry::class)]);
 		$initialize->addBody($original);
 	}
 
