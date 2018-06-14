@@ -45,9 +45,9 @@ class AnnotationsExtension extends CompilerExtension
 		$builder->addDefinition($this->prefix('reader'))
 			->setClass(Reader::class)
 			->setFactory(CachedReader::class, [
-				0 => $this->prefix('@delegatedReader'),
-				// 1 => cache is autowired
-				2 => $config['debug'],
+				$this->prefix('@delegatedReader'),
+				$this->prefix('@cache'),
+				$config['debug'],
 			]);
 
 		AnnotationRegistry::registerUniqueLoader('class_exists');
@@ -63,19 +63,23 @@ class AnnotationsExtension extends CompilerExtension
 			if ($config['cache'] === FilesystemCache::class) {
 				$path = $builder->expand('%tempDir%/cache/Doctrine.Annotations');
 				$builder->addDefinition($this->prefix('cache'))
-					->setFactory($config['cache'], [$path]);
+					->setFactory($config['cache'], [$path])
+					->setAutowired(false);
 			} else {
 				$builder->addDefinition($this->prefix('cache'))
-					->setFactory($config['cache']);
+					->setFactory($config['cache'])
+					->setAutowired(false);
 			}
 		} elseif ($config['cache'] instanceof Statement) {
 			// Filled by other service
 			$builder->addDefinition($this->prefix('cache'))
-				->setFactory($config['cache']);
+				->setFactory($config['cache'])
+				->setAutowired(false);
 		} elseif (!$config['cache']) {
 			// No cache (memory only)
 			$builder->addDefinition($this->prefix('cache'))
-				->setFactory(ArrayCache::class);
+				->setFactory(ArrayCache::class)
+				->setAutowired(false);
 		}
 	}
 
