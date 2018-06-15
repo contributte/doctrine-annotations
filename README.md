@@ -26,9 +26,8 @@ composer require nettrine/annotations
 
 | State       | Version | Branch   | PHP      |
 |-------------|---------|----------|----------|
-| development | `^0.3`  | `master` | `>= 7.1` |
-| stable      | `^0.2`  | `master` | `>= 7.1` |
-| stable      | `^0.1`  | `master` | `>= 5.6` |
+| development | `^0.4`  | `master` | `>= 7.1` |
+| stable      | `^0.3`  | `master` | `>= 7.1` |
 
 ## Overview
 
