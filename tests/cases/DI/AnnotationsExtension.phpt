@@ -4,6 +4,7 @@ namespace Tests\Nettrine\Annotations\Cases\DI;
 
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Cache\ApcuCache;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Nette\DI\Compiler;
@@ -37,12 +38,30 @@ test(function (): void {
 		$compiler->addExtension('annotations', new AnnotationsExtension());
 		$compiler->loadConfig(FileMock::create('
 		services:
-			mycache: Doctrine\Common\Cache\ArrayCache
+			mycache: Doctrine\Common\Cache\ApcuCache
 		
 		annotations:
 			cache: @mycache
 		', 'neon'));
 	}, '2');
+
+	/** @var Container $container */
+	$container = new $class();
+	Assert::type(CachedReader::class, $container->getByType(Reader::class));
+	Assert::type(ApcuCache::class, $container->getService('annotations.cache'));
+});
+
+test(function (): void {
+	$loader = new ContainerLoader(TEMP_DIR, true);
+	$class = $loader->load(function (Compiler $compiler): void {
+		//Required services and params
+		$compiler->addConfig(['parameters' => ['tempDir' => TEMP_DIR]]);
+		$compiler->addExtension('annotations', new AnnotationsExtension());
+		$compiler->loadConfig(FileMock::create('
+		annotations:
+			cache: off
+		', 'neon'));
+	}, '3');
 
 	/** @var Container $container */
 	$container = new $class();
