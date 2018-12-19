@@ -14,7 +14,7 @@
   "require": {
     "php": ">=7.1",
     "doctrine/annotations": "^1.6.0",
-    "nette/di": "^2.4.12",
+    "nette/di": "^2.4.14",
     "doctrine/cache": "^1.7.1"
   },
   "require-dev": {
