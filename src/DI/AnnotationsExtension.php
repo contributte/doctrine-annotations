@@ -9,6 +9,7 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Helpers;
 use Nette\DI\Statement;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpLiteral;
@@ -32,7 +33,7 @@ class AnnotationsExtension extends CompilerExtension
 		$config = $this->getConfig($this->defaults);
 
 		$reader = $builder->addDefinition($this->prefix('delegatedReader'))
-			->setClass(AnnotationReader::class)
+			->setFactory(AnnotationReader::class)
 			->setAutowired(false);
 
 		foreach ((array) $config['ignore'] as $annotationName) {
@@ -43,7 +44,7 @@ class AnnotationsExtension extends CompilerExtension
 		$this->loadCacheConfiguration();
 
 		$builder->addDefinition($this->prefix('reader'))
-			->setClass(Reader::class)
+			->setType(Reader::class)
 			->setFactory(CachedReader::class, [
 				$this->prefix('@delegatedReader'),
 				$this->prefix('@cache'),
@@ -61,7 +62,7 @@ class AnnotationsExtension extends CompilerExtension
 		if (is_string($config['cache'])) {
 			// FilesystemCache needs extra configuration (paths)
 			if ($config['cache'] === FilesystemCache::class) {
-				$path = $builder->expand('%tempDir%/cache/Doctrine.Annotations');
+				$path = Helpers::expand('%tempDir%/cache/Doctrine.Annotations', $builder->parameters);
 				$builder->addDefinition($this->prefix('cache'))
 					->setFactory($config['cache'], [$path])
 					->setAutowired(false);
@@ -75,7 +76,7 @@ class AnnotationsExtension extends CompilerExtension
 			$builder->addDefinition($this->prefix('cache'))
 				->setFactory($config['cache'])
 				->setAutowired(false);
-		} elseif (!$config['cache']) {
+		} elseif ($config['cache'] === null || $config['cache'] === false) {
 			// No cache (memory only)
 			$builder->addDefinition($this->prefix('cache'))
 				->setFactory(ArrayCache::class)

@@ -7,10 +7,10 @@
 [![Build Status](https://img.shields.io/travis/nettrine/annotations.svg?style=flat-square)](https://travis-ci.org/nettrine/annotations)
 [![Code coverage](https://img.shields.io/coveralls/nettrine/annotations.svg?style=flat-square)](https://coveralls.io/r/nettrine/annotations)
 [![Licence](https://img.shields.io/packagist/l/nettrine/annotations.svg?style=flat-square)](https://packagist.org/packages/nettrine/annotations)
-
 [![Downloads this Month](https://img.shields.io/packagist/dm/nettrine/annotations.svg?style=flat-square)](https://packagist.org/packages/nettrine/annotations)
 [![Downloads total](https://img.shields.io/packagist/dt/nettrine/annotations.svg?style=flat-square)](https://packagist.org/packages/nettrine/annotations)
 [![Latest stable](https://img.shields.io/packagist/v/nettrine/annotations.svg?style=flat-square)](https://packagist.org/packages/nettrine/annotations)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
 
 ## Discussion / Help
 
@@ -55,7 +55,7 @@ composer require nettrine/annotations
         <a href="https://github.com/benijo">Josef Benjač</a>
       </td>
     </tr>
-  <tbody>
+  </tbody>
 </table>
 
 -----
