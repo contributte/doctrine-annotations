@@ -1,8 +1,6 @@
-# Annotations
+# Nettrine Annotations
 
-[Doctrine\Annotations](http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html) to Nette Framework.
-
------
+[Doctrine\Annotations](http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html) for Nette Framework.
 
 [![Build Status](https://img.shields.io/travis/nettrine/annotations.svg?style=flat-square)](https://travis-ci.org/nettrine/annotations)
 [![Code coverage](https://img.shields.io/coveralls/nettrine/annotations.svg?style=flat-square)](https://coveralls.io/r/nettrine/annotations)
@@ -16,24 +14,18 @@
 
 [![Join the chat](https://img.shields.io/gitter/room/nettrine/nettrine.svg?style=flat-square)](https://gitter.im/nettrine/nettrine)
 
-## Install
+## Documentation
 
-```sh
-composer require nettrine/annotations
-```
+- [Setup](.docs/README.md#setup)
+- [Configuration](.docs/README.md#configuration)
+- [Example - create own annotation](.docs/README.md#example)
 
 ## Versions
 
-| State       | Version | Branch   | PHP      |
-|-------------|---------|----------|----------|
-| development | `^0.5`  | `master` | `>= 7.1` |
-| stable      | `^0.4`  | `master` | `>= 7.1` |
-
-## Overview
-
-- [Usage - how to register](https://github.com/nettrine/annotations/blob/master/.docs/README.md#usage)
-- [Extension - how to configure](https://github.com/nettrine/annotations/blob/master/.docs/README.md#configuration)
-- [Example - how to create annotation](https://github.com/nettrine/annotations/blob/master/.docs/README.md#example)
+| State       | Version | Branch   | Nette  | PHP    |
+|-------------|---------|----------|--------|--------|
+| development | `^0.5`  | `master` | `3.0+` | `^7.2` |
+| stable      | `^0.4`  | `master` | `2.4`  | `^7.1` |
 
 ## Maintainers
 
@@ -57,7 +49,5 @@ composer require nettrine/annotations
     </tr>
   </tbody>
 </table>
-
------
 
 Thank you for testing, reporting and contributing.

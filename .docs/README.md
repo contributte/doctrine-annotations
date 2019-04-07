@@ -1,14 +1,22 @@
-# Annotations
+# Nettrine Annotations
+
+[Doctrine\Annotations](http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html) for Nette Framework.
 
 ## Content
 
-- [Usage - how to register](#usage)
-- [Extension - how to configure](#configuration)
-- [Example - how to create annotation](#example)
+- [Setup](#setup)
+- [Configuration](#configuration)
+- [Example - create own annotation](#example)
 
-## Usage
+## Setup
 
-At first you should register `AnnotationsExtension` at your config file.
+Install package
+
+```bash
+composer require nettrine/annotations
+```
+
+Register extension
 
 ```yaml
 extensions:

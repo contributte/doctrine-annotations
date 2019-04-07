@@ -13,16 +13,24 @@ use Nette\DI\Helpers;
 use Nette\DI\Statement;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpLiteral;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
+use stdClass;
 
+/**
+ * @property-read stdClass $config
+ */
 class AnnotationsExtension extends CompilerExtension
 {
 
-	/** @var mixed[] */
-	public $defaults = [
-		'debug' => false,
-		'ignore' => [],
-		'cache' => FilesystemCache::class,
-	];
+	public function getConfigSchema(): Schema
+	{
+		return Expect::structure([
+			'debug' => Expect::bool(false),
+			'ignore' => Expect::listOf('string'),
+			'cache' => Expect::type('string|null|' . Statement::class)->default(FilesystemCache::class),
+		]);
+	}
 
 	/**
 	 * Register services
@@ -30,13 +38,13 @@ class AnnotationsExtension extends CompilerExtension
 	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
-		$config = $this->getConfig($this->defaults);
+		$config = $this->config;
 
 		$reader = $builder->addDefinition($this->prefix('delegatedReader'))
 			->setFactory(AnnotationReader::class)
 			->setAutowired(false);
 
-		foreach ((array) $config['ignore'] as $annotationName) {
+		foreach ($config->ignore as $annotationName) {
 			$reader->addSetup('addGlobalIgnoredName', [$annotationName]);
 			AnnotationReader::addGlobalIgnoredName($annotationName);
 		}
@@ -48,7 +56,7 @@ class AnnotationsExtension extends CompilerExtension
 			->setFactory(CachedReader::class, [
 				$this->prefix('@delegatedReader'),
 				$this->prefix('@cache'),
-				$config['debug'],
+				$config->debug,
 			]);
 
 		AnnotationRegistry::registerUniqueLoader('class_exists');
@@ -57,26 +65,26 @@ class AnnotationsExtension extends CompilerExtension
 	protected function loadCacheConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
-		$config = $this->getConfig($this->defaults);
+		$config = $this->config;
 
-		if (is_string($config['cache'])) {
+		if (is_string($config->cache)) {
 			// FilesystemCache needs extra configuration (paths)
-			if ($config['cache'] === FilesystemCache::class) {
+			if ($config->cache === FilesystemCache::class) {
 				$path = Helpers::expand('%tempDir%/cache/Doctrine.Annotations', $builder->parameters);
 				$builder->addDefinition($this->prefix('cache'))
-					->setFactory($config['cache'], [$path])
+					->setFactory($config->cache, [$path])
 					->setAutowired(false);
 			} else {
 				$builder->addDefinition($this->prefix('cache'))
-					->setFactory($config['cache'])
+					->setFactory($config->cache)
 					->setAutowired(false);
 			}
-		} elseif ($config['cache'] instanceof Statement) {
+		} elseif ($config->cache instanceof Statement) {
 			// Filled by other service
 			$builder->addDefinition($this->prefix('cache'))
-				->setFactory($config['cache'])
+				->setFactory($config->cache)
 				->setAutowired(false);
-		} elseif ($config['cache'] === null || $config['cache'] === false) {
+		} else {
 			// No cache (memory only)
 			$builder->addDefinition($this->prefix('cache'))
 				->setFactory(ArrayCache::class)
