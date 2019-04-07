@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Nettrine\Annotations\Cases\Reader;
+namespace Tests\Cases\Unit\Reader;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;
@@ -9,32 +9,28 @@ use Nette\DI\Container;
 use Nette\DI\ContainerLoader;
 use Nettrine\Annotations\DI\AnnotationsExtension;
 use ReflectionClass;
-use Tester\Assert;
-use Tester\FileMock;
-use Tester\TestCase;
-use Tests\Nettrine\Annotations\Fixtures\SampleAnnotation;
-use Tests\Nettrine\Annotations\Fixtures\SampleClass;
+use Tests\Fixtures\SampleAnnotation;
+use Tests\Fixtures\SampleClass;
+use Tests\Toolkit\NeonLoader;
+use Tests\Toolkit\TestCase;
 
-require_once __DIR__ . '/../../bootstrap.php';
-
-/**
- * @testCase
- */
-class ReaderTest extends TestCase
+final class ReaderTest extends TestCase
 {
 
-	public function testClassAnnotations(): void
+	public function testIgnoreAnnotations(): void
 	{
-		$loader = new ContainerLoader(TEMP_DIR, true);
+		$loader = new ContainerLoader(TEMP_PATH, true);
 		$class = $loader->load(function (Compiler $compiler): void {
-			$compiler->addConfig(['parameters' => ['tempDir' => TEMP_DIR]]);
 			$compiler->addExtension('annotations', new AnnotationsExtension());
-			$compiler->loadConfig(FileMock::create('
+			$compiler->addConfig(['parameters' => ['tempDir' => TEMP_PATH]]);
+			$compiler->addConfig(NeonLoader::load('
 			annotations:
 				ignore:
 					- ignoredAnnotation
 		', 'neon'));
-		}, '1a');
+			$compiler->addDependencies([__FILE__]);
+		}, __METHOD__);
+
 		/** @var Container $container */
 		$container = new $class();
 
@@ -43,11 +39,9 @@ class ReaderTest extends TestCase
 
 		$annotations = $reader->getClassAnnotations(new ReflectionClass(SampleClass::class));
 
-		Assert::notEqual(0, count($annotations));
-		Assert::type(SampleAnnotation::class, $annotations[0]);
-		Assert::equal('foo', $annotations[0]->getValue());
+		$this->assertNotCount(0, $annotations);
+		$this->assertInstanceOf(SampleAnnotation::class, $annotations[0]);
+		$this->assertEquals('foo', $annotations[0]->getValue());
 	}
 
 }
-
-(new ReaderTest())->run();
