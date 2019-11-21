@@ -29,7 +29,6 @@ extensions:
 annotations:
     debug: %debugMode%
     ignore: []
-    cache: Doctrine\Common\Cache\FilesystemCache
 ```
 
 Optionally you can configure ignored annotations:
@@ -40,11 +39,21 @@ annotations:
         - someIgnoredAnnotation
 ```
 
-Refer already defined cache (instance of `Doctrine\Common\Cache`).
+Set cache service for annotations, otherwise an autowired service is used. You may use [nettrine/cache](https://github.com/nettrine/cache) to setup cache.
 
 ```yaml
 annotations:
-    cache: @mycache
+    cache: Doctrine\Common\Cache\PhpFileCache(%tempDir%/cache/doctrine)
+
+# or
+
+services:
+    - Doctrine\Common\Cache\PhpFileCache(%tempDir%/cache/doctrine)
+
+# or
+
+extensions:
+    nettrine.cache: Nettrine\Cache\DI\CacheExtension
 ```
 
 ## Example

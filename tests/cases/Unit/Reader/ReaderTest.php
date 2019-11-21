@@ -2,7 +2,6 @@
 
 namespace Tests\Cases\Unit\Reader;
 
-use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;
 use Nette\DI\Compiler;
 use Nette\DI\Container;
@@ -25,17 +24,18 @@ final class ReaderTest extends TestCase
 			$compiler->addConfig(['parameters' => ['tempDir' => TEMP_PATH]]);
 			$compiler->addConfig(NeonLoader::load('
 			annotations:
+				cache: Doctrine\Common\Cache\FilesystemCache(%tempDir%/nettrine.annotations)
 				ignore:
 					- ignoredAnnotation
-		', 'neon'));
+		'));
 			$compiler->addDependencies([__FILE__]);
 		}, __METHOD__);
 
-		/** @var Container $container */
 		$container = new $class();
+		assert($container instanceof Container);
 
-		/** @var AnnotationReader $reader */
 		$reader = $container->getByType(Reader::class);
+		assert($reader instanceof Reader);
 
 		$annotations = $reader->getClassAnnotations(new ReflectionClass(SampleClass::class));
 

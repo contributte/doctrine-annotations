@@ -5,74 +5,74 @@ namespace Tests\Cases\Unit\DI;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\ApcuCache;
-use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Cache\PhpFileCache;
 use Nette\DI\Compiler;
 use Nette\DI\Container;
 use Nette\DI\ContainerLoader;
+use Nette\InvalidStateException;
 use Nettrine\Annotations\DI\AnnotationsExtension;
+use Nettrine\Cache\DI\CacheExtension;
 use Tests\Toolkit\NeonLoader;
 use Tests\Toolkit\TestCase;
 
 final class AnnotationsExtensionTest extends TestCase
 {
 
-	public function testRegister(): void
+	public function testAutowiredCache(): void
 	{
 		$loader = new ContainerLoader(TEMP_PATH, true);
-		$class = $loader->load(function (Compiler $compiler): void {
+		$class = $loader->load(static function (Compiler $compiler): void {
 			$compiler->addExtension('annotations', new AnnotationsExtension());
-			$compiler->addConfig(['parameters' => ['tempDir' => TEMP_PATH]]);
+			$compiler->addExtension('cache', new CacheExtension());
+			$compiler->addConfig([
+				'parameters' => [
+					'tempDir' => TEMP_PATH,
+				],
+			]);
 			$compiler->addDependencies([__FILE__]);
 		}, __METHOD__);
 
-		/** @var Container $container */
 		$container = new $class();
+		assert($container instanceof Container);
 
 		$this->assertInstanceOf(CachedReader::class, $container->getByType(Reader::class));
-		$this->assertInstanceOf(FilesystemCache::class, $container->getService('annotations.cache'));
+		$this->assertInstanceOf(PhpFileCache::class, $container->getService('cache.driver'));
 	}
 
-	public function testProvideCache(): void
+	public function testProvidedCache(): void
 	{
 		$loader = new ContainerLoader(TEMP_PATH, true);
-		$class = $loader->load(function (Compiler $compiler): void {
+		$class = $loader->load(static function (Compiler $compiler): void {
 			$compiler->addExtension('annotations', new AnnotationsExtension());
-			$compiler->addConfig(['parameters' => ['tempDir' => TEMP_PATH]]);
 			$compiler->addConfig(NeonLoader::load('
-			services:
-				mycache: Doctrine\Common\Cache\ApcuCache
-			
 			annotations:
-				cache: @mycache
-		', 'neon'));
+				cache: Doctrine\Common\Cache\ApcuCache
+		'));
 			$compiler->addDependencies([__FILE__]);
 		}, __METHOD__);
 
-		/** @var Container $container */
 		$container = new $class();
+		assert($container instanceof Container);
 
 		$this->assertInstanceOf(CachedReader::class, $container->getByType(Reader::class));
 		$this->assertInstanceOf(ApcuCache::class, $container->getService('annotations.cache'));
+		$this->assertNull($container->getByType(Cache::class, false));
 	}
 
-	public function testDisableCache(): void
+	public function testNoCache(): void
 	{
+		$this->expectException(InvalidStateException::class);
+		$this->expectExceptionMessage('Service \'annotations.reader\' (type of Doctrine\Common\Annotations\Reader): Service of type \'Doctrine\Common\Cache\Cache\' not found.');
+
 		$loader = new ContainerLoader(TEMP_PATH, true);
-		$class = $loader->load(function (Compiler $compiler): void {
+		$class = $loader->load(static function (Compiler $compiler): void {
 			$compiler->addExtension('annotations', new AnnotationsExtension());
-			$compiler->addConfig(['parameters' => ['tempDir' => TEMP_PATH]]);
-			$compiler->addConfig(NeonLoader::load('
-			annotations:
-				cache: null
-		', 'neon'));
 			$compiler->addDependencies([__FILE__]);
 		}, __METHOD__);
 
-		/** @var Container $container */
 		$container = new $class();
-		$this->assertInstanceOf(CachedReader::class, $container->getByType(Reader::class));
-		$this->assertInstanceOf(ArrayCache::class, $container->getService('annotations.cache'));
+		assert($container instanceof Container);
 	}
 
 }
