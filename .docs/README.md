@@ -29,7 +29,6 @@ extensions:
 annotations:
     debug: %debugMode%
     ignore: []
-    cache: Doctrine\Common\Cache\FilesystemCache
 ```
 
 Optionally you can configure ignored annotations:
@@ -40,7 +39,7 @@ annotations:
         - someIgnoredAnnotation
 ```
 
-Refer already defined cache (instance of `Doctrine\Common\Cache`).
+Refer to specific cache service which implements `Doctrine\Common\Cache` (otherwise autowired one is used)
 
 ```yaml
 annotations:

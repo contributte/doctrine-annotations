@@ -9,13 +9,17 @@
     {
       "name": "Milan Felix Šulc",
       "homepage": "https://f3l1x.io"
+    },
+    {
+      "name": "Marek Bartoš",
+      "homepage": "https://github.com/mabar"
     }
   ],
   "require": {
     "php": "^7.2",
+    "contributte/di": "^0.4.0",
     "doctrine/annotations": "^1.6.1",
-    "doctrine/cache": "^1.8.0",
-    "nette/di": "~3.0.0"
+    "doctrine/cache": "^1.8.0"
   },
   "require-dev": {
     "mockery/mockery": "^1.2.2",
