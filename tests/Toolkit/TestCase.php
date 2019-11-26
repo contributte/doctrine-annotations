@@ -1,8 +1,7 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Toolkit;
+namespace Tests\Nettrine\Annotations\Toolkit;
 
-use Mockery;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
 abstract class TestCase extends PHPUnitTestCase
@@ -17,13 +16,8 @@ abstract class TestCase extends PHPUnitTestCase
 		}
 
 		if (!defined('FIXTURES_PATH')) {
-			define('FIXTURES_PATH', __DIR__ . '/../fixtures');
+			define('FIXTURES_PATH', __DIR__ . '/../Fixtures');
 		}
-	}
-
-	protected function tearDown(): void
-	{
-		Mockery::close();
 	}
 
 }

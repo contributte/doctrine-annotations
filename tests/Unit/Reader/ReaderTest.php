@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Cases\Unit\Reader;
+namespace Tests\Nettrine\Annotations\Unit\Reader;
 
 use Doctrine\Common\Annotations\Reader;
 use Nette\DI\Compiler;
@@ -8,10 +8,10 @@ use Nette\DI\Container;
 use Nette\DI\ContainerLoader;
 use Nettrine\Annotations\DI\AnnotationsExtension;
 use ReflectionClass;
-use Tests\Fixtures\SampleAnnotation;
-use Tests\Fixtures\SampleClass;
-use Tests\Toolkit\NeonLoader;
-use Tests\Toolkit\TestCase;
+use Tests\Nettrine\Annotations\Fixtures\SampleAnnotation;
+use Tests\Nettrine\Annotations\Fixtures\SampleClass;
+use Tests\Nettrine\Annotations\Toolkit\NeonLoader;
+use Tests\Nettrine\Annotations\Toolkit\TestCase;
 
 final class ReaderTest extends TestCase
 {

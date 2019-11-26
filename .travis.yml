@@ -1,4 +1,5 @@
 language: php
+
 php:
   - 7.2
   - 7.3
@@ -9,15 +10,15 @@ before_install:
   - phpenv config-rm xdebug.ini || return 0 # Turn off XDebug
 
 install:
-  - travis_retry composer install --no-progress --prefer-dist # Install dependencies
+  - travis_retry composer install --no-progress --prefer-dist
 
 script:
-  - make tests # Tests
+  - make tests
 
 jobs:
   include:
-    - env: title="Lowest Dependencies 7.3"
-      php: 7.3
+    - env: title="Lowest Dependencies"
+      php: 7.2
       install:
         - travis_retry composer update --no-progress --prefer-dist --prefer-lowest --prefer-stable
       script:

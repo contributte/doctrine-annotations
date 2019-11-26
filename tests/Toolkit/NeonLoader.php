@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Toolkit;
+namespace Tests\Nettrine\Annotations\Toolkit;
 
 use Nette\DI\Config\Adapters\NeonAdapter;
 use Nette\Neon\Neon;

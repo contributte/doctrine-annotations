@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Cases\Unit\DI;
+namespace Tests\Nettrine\Annotations\Unit\DI;
 
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
@@ -13,8 +13,8 @@ use Nette\DI\ContainerLoader;
 use Nette\InvalidStateException;
 use Nettrine\Annotations\DI\AnnotationsExtension;
 use Nettrine\Cache\DI\CacheExtension;
-use Tests\Toolkit\NeonLoader;
-use Tests\Toolkit\TestCase;
+use Tests\Nettrine\Annotations\Toolkit\NeonLoader;
+use Tests\Nettrine\Annotations\Toolkit\TestCase;
 
 final class AnnotationsExtensionTest extends TestCase
 {
