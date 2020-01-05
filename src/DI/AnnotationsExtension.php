@@ -2,13 +2,12 @@
 
 namespace Nettrine\Annotations\DI;
 
-use Contributte\DI\Helper\ExtensionDefinitionsHelper;
+use Contributte\DI\Extension\CompilerExtension;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
-use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\Definition;
 use Nette\DI\Definitions\Statement;
 use Nette\PhpGenerator\ClassType;
@@ -57,9 +56,8 @@ class AnnotationsExtension extends CompilerExtension
 		}
 
 		if ($config->cache !== null) {
-			$definitionsHelper = new ExtensionDefinitionsHelper($this->compiler);
 			$cacheName = $this->prefix('cache');
-			$cacheDefinition = $definitionsHelper->getDefinitionFromConfig($config->cache, $cacheName);
+			$cacheDefinition = $this->getHelper()->getDefinitionFromConfig($config->cache, $cacheName);
 
 			// If service is extension specific, then disable autowiring
 			if ($cacheDefinition instanceof Definition && $cacheDefinition->getName() === $cacheName) {
