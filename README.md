@@ -1,6 +1,6 @@
 # Nettrine Annotations
 
-[Doctrine\Annotations](http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html) for Nette Framework.
+[Doctrine/Annotations](https://www.doctrine-project.org/projects/annotations.html) for Nette Framework.
 
 [![Build Status](https://img.shields.io/travis/nettrine/annotations.svg?style=flat-square)](https://travis-ci.org/nettrine/annotations)
 [![Code coverage](https://img.shields.io/coveralls/nettrine/annotations.svg?style=flat-square)](https://coveralls.io/r/nettrine/annotations)
@@ -17,8 +17,10 @@
 ## Documentation
 
 - [Setup](.docs/README.md#setup)
+- [Relying](.docs/README.md#relying)
 - [Configuration](.docs/README.md#configuration)
-- [Example - create own annotation](.docs/README.md#example)
+- [Usage](.docs/README.md#usage)
+- [Examples](.docs/README.md#examples)
 
 ## Versions
 

@@ -1,12 +1,16 @@
 # Nettrine Annotations
 
-[Doctrine\Annotations](http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html) for Nette Framework.
+[Doctrine/Annotations](https://www.doctrine-project.org/projects/annotations.html) for Nette Framework.
+
 
 ## Content
 
 - [Setup](#setup)
+- [Relying](#relying)
 - [Configuration](#configuration)
-- [Example - create own annotation](#example)
+- [Usage](#usage)
+- [Examples](#examples)
+
 
 ## Setup
 
@@ -20,102 +24,94 @@ Register extension
 
 ```yaml
 extensions:
-    annotations: Nettrine\Annotations\DI\AnnotationsExtension
+  nettrine.annotations: Nettrine\Annotations\DI\AnnotationsExtension
 ```
+
+
+## Relying
+
+Take advantage of enpowering this package with 1 extra package:
+
+- `doctrine/cache`
+
+
+### `doctrine/cache`
+
+This package can be enhanced with `doctrine/cache`, use prepared [nettrine/cache](https://github.com/nettrine/cache) integration.
+
+```bash
+composer require nettrine/cache
+```
+
+```yaml
+extensions:
+  nettrine.cache: Nettrine\Cache\DI\CacheExtension
+```
+
 
 ## Configuration
 
+**Schema definition**
+
 ```yaml
-annotations:
-    debug: %debugMode%
-    ignore: []
+nettrine.annotations:
+  debug: <boolean>
+  ignore: <string[]>
+  cache: <class|service>
 ```
 
-Optionally you can configure ignored annotations:
+**Under the hood**
 
 ```yaml
-annotations:
-    ignore:
-        - someIgnoredAnnotation
+nettrine.annotations:
+  debug: %debugMode%
+  ignore: [author, since, see]
+  cache: Doctrine\Common\Cache\PhpFileCache(%tempDir%/cache/doctrine)
 ```
 
-Set cache service for annotations, otherwise an autowired service is used. You may use [nettrine/cache](https://github.com/nettrine/cache) to setup cache.
+You may omit `cache` key using [nettrine/cache](https://github.com/nettrine/cache) to setup cache.
 
 ```yaml
-annotations:
-    cache: Doctrine\Common\Cache\PhpFileCache(%tempDir%/cache/doctrine)
+nettrine.annotations:
+  debug: %debugMode%
+```
 
-# or
 
+## Usage
+
+You can count on [Nette Dependency Injection](https://doc.nette.org/en/3.0/dependency-injection).
+
+```php
+use Doctrine\Common\Annotations\Reader;
+
+class MyReader {
+
+  /** @var Reader */
+  private $reader;
+
+  public function __construct(Reader $reader)
+  {
+    $this->reader = $reader;
+  }
+
+  public function reader()
+  {
+    $annotations = $this->reader->getClassAnnotations(new \ReflectionClass(UserEntity::class));
+  }
+
+}
+```
+
+Register reader `MyReader` under services in NEON file.
+
+```yaml
 services:
-    - Doctrine\Common\Cache\PhpFileCache(%tempDir%/cache/doctrine)
-
-# or
-
-extensions:
-    nettrine.cache: Nettrine\Cache\DI\CacheExtension
+  - MyReader
 ```
 
-## Example
+You can create, define and read your own annotations. Take a look [how to do that](https://www.doctrine-project.org/projects/doctrine-annotations/en/latest/index.html#create-an-annotation-class).
 
-Create own annotation. Specify your targets `CLASS, METHOD, PROPERTY, ALL, ANNOTATION`.
 
-[More you can find at official documentation.](http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html#annotation-classes)
+## Examples
 
-```php
-use Doctrine\Common\Annotations\Annotation;
-
-/**
- * @Annotation
- * @Target("CLASS")
- */
-class SampleAnnotation
-{
-
-	/** @var string|NULL */
-	private $value;
-
-	/**
-	 * @param string[] $values
-	 */
-	public function __construct(array $values)
-	{
-		$this->value = isset($values['value']) ? $values['value'] : NULL;
-	}
-
-	/**
-	 * @return string|NULL
-	 */
-	public function getValue()
-	{
-		return $this->value;
-	}
-
-}
-```
-
-Use annotation in your class.
-
-```php
-/**
- * @SampleAnnotation(value="foo")
- */
-class SampleClass
-{
-
-}
-```
-
-Now you can use `Reader` service from your Container. 
-
-```php
-/** @var Doctrine\Common\Annotations\Reader @inject */
-public $reader;
-```
-
-And get class, method or property annotations.
-
-```php
-$annotations = $this->reader->getClassAnnotations(new \ReflectionClass(SampleClass::class));
-$annotations[0]->getValue(); //foo
-```
+You can find more examples in [planette playground](https://github.com/planette/playground) repository.
