@@ -30,7 +30,7 @@ extensions:
 
 ## Relying
 
-Take advantage of enpowering this package with 1 extra package:
+Take advantage of empowering this package with 1 extra package:
 
 - `doctrine/cache`
 
