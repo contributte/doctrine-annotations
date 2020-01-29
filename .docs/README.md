@@ -69,7 +69,7 @@ nettrine.annotations:
   cache: Doctrine\Common\Cache\PhpFileCache(%tempDir%/cache/doctrine)
 ```
 
-You may omit `cache` key using [nettrine/cache](https://github.com/nettrine/cache) to setup cache.
+You may omit the `cache` key using [nettrine/cache](https://github.com/nettrine/cache) to setup cache.
 
 ```yaml
 nettrine.annotations:
