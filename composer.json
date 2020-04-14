@@ -19,7 +19,7 @@
     "php": "^7.2",
     "contributte/di": "^0.4.2",
     "doctrine/annotations": "^1.6.1",
-    "nettrine/cache": "^0.1.0"
+    "nettrine/cache": "^0.2.0"
   },
   "require-dev": {
     "nettrine/cache": "^0.1.0",
