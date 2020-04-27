@@ -22,7 +22,6 @@
     "nettrine/cache": "^0.2.0"
   },
   "require-dev": {
-    "nettrine/cache": "^0.1.0",
     "ninjify/qa": "^0.10.0",
     "phpstan/extension-installer": "^1.0",
     "phpstan/phpstan-deprecation-rules": "^0.11.0",
