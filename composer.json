@@ -19,7 +19,7 @@
     "php": ">=7.2",
     "contributte/di": "^0.4.2",
     "doctrine/annotations": "^1.6.1",
-    "nettrine/cache": "^0.2.0"
+    "nettrine/cache": "^0.3.0"
   },
   "require-dev": {
     "ninjify/qa": "^0.10.0",
