@@ -26,4 +26,4 @@ tests: ## Run all tests
 	vendor/bin/phpunit tests --cache-result-file=tests/tmp/phpunit.cache --colors=always
 
 coverage: ## Generate code coverage in XML format
-	phpdbg -qrr vendor/bin/phpunit tests --cache-result-file=tests/tmp/phpunit.cache --colors=always -c tests/coverage.xml
+	vendor/bin/phpunit tests --cache-result-file=tests/tmp/phpunit.cache --colors=always -c tests/coverage.xml
