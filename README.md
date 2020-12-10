@@ -1,40 +1,23 @@
-![Nettrine Annotations](https://heatbadger.now.sh/github/readme/nettrine/annotations/)
+![](https://heatbadger.now.sh/github/readme/nettrine/annotations/)
 
 <p align=center>
-  <a href="https://github.com/nettrine/annotations/actions">
-    <img src="https://badgen.net/github/checks/nettrine/annotations/master?cache=300">
-  </a>
-  <a href="https://coveralls.io/r/nettrine/annotations">
-    <img src="https://badgen.net/coveralls/c/github/nettrine/annotations?cache=300">
-  </a>
-  <a href="https://packagist.org/packages/nettrine/annotations">
-    <img src="https://badgen.net/packagist/dm/nettrine/annotations">
-  </a>
-  <a href="https://packagist.org/packages/nettrine/annotations">
-    <img src="https://badgen.net/packagist/v/nettrine/annotations">
-  </a>
+  <a href="https://github.com/nettrine/annotations/actions"><img src="https://badgen.net/github/checks/nettrine/annotations/master?annotations=300"></a>
+  <a href="https://coveralls.io/r/nettrine/annotations"><img src="https://badgen.net/coveralls/c/github/nettrine/annotations?annotations=300"></a>
+  <a href="https://packagist.org/packages/nettrine/annotations"><img src="https://badgen.net/packagist/dm/nettrine/annotations"></a>
+  <a href="https://packagist.org/packages/nettrine/annotations"><img src="https://badgen.net/packagist/v/nettrine/annotations"></a>
 </p>
 <p align=center>
-  <a href="https://packagist.org/packages/nettrine/annotations">
-    <img src="https://badgen.net/packagist/php/nettrine/annotations">
-  </a>
-  <a href="https://github.com/nettrine/annotations">
-    <img src="https://badgen.net/github/license/nettrine/annotations">
-  </a>
-  <a href="http://bit.ly/apittegitter">
-    <img src="https://badgen.net/badge/chat/apitte/cyan">
-  </a>
-  <a href="https://bit.ly/cttfo">
-    <img src="https://badgen.net/badge/support/forum/yellow">
-  </a>
-  <a href="https://contributte.org/partners.html">
-    <img src="https://badgen.net/badge/become/a%20patron/F96854">
-  </a>
-<p>
+  <a href="https://packagist.org/packages/nettrine/annotations"><img src="https://badgen.net/packagist/php/nettrine/annotations"></a>
+  <a href="https://github.com/nettrine/annotations"><img src="https://badgen.net/github/license/nettrine/annotations"></a>
+  <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
+  <a href="https://bit.ly/cttfo"><img src="https://badgen.net/badge/support/forum/yellow"></a>
+  <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
+</p>
 
 <p align=center>
-Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
+Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
 </p>
+
 
 ## Usage
 
@@ -52,8 +35,8 @@ For details on how to use this package, check out our [documentation](.docs).
 
 | State  | Version | Branch   | Nette  | PHP     |
 |--------|---------|----------|--------|---------|
-| dev    | `^0.7`  | `master` | `3.0+` | `>=7.2` |
-| stable | `^0.6`  | `master` | `3.0+` | `^7.2`  |
+| dev    | `^0.8`  | `master` | `3.0+` | `>=7.2` |
+| stable | `^0.7`  | `master` | `3.0+` | `>=7.2`  |
 | stable | `^0.4`  | `master` | `2.4`  | `^7.1`  |
 
 ## Development
@@ -72,4 +55,8 @@ This package is currently maintaining by these authors.
   <img width="80" height="80" src="https://avatars1.githubusercontent.com/u/22914186?s=80&v=4">
 </a>
 
-The development is sponsored by [Tlapnet](https://www.tlapnet.cz)
+-----
+
+Consider to [support](https://contributte.org/partners.html) **contributte** development team.
+Also thank you for using this package.
+
