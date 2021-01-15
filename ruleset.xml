@@ -5,10 +5,12 @@
 
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
-			<property name="rootNamespaces" type="array" value="
-				src   => Nettrine\Annotations,
-				tests => Tests\Nettrine\Annotations,
-			"/>
+			<property name="rootNamespaces" type="array">
+				<element key="src" value="Nettrine\Annotations"/>
+				<element key="tests/cases" value="Tests\Cases"/>
+				<element key="tests/fixtures" value="Tests\Fixtures"/>
+				<element key="tests/toolkit" value="Tests\Toolkit"/>
+			</property>
 		</properties>
 	</rule>
 

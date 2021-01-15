@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Nettrine\Annotations\Fixtures;
+namespace Tests\Fixtures;
 
 use Doctrine\Common\Annotations\Annotation;
 
