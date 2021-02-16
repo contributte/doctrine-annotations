@@ -21,10 +21,10 @@ Website ðŸš€ <a href="https://contributte.org">contributte.org</a> | Contact ðŸ‘
 
 ## Usage
 
-To install the latest version of `nettrine/annotations` use [Composer](https://getcomposer.com).
+To install the latest version of `nettrine/annotations` use [Composer](https://getcomposer.org).
 
 ```
-composer require nettrine/annotations
+$ composer require nettrine/annotations
 ```
 
 ## Documentation
