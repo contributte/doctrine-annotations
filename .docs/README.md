@@ -114,4 +114,5 @@ You can create, define and read your own annotations. Take a look [how to do tha
 
 ## Examples
 
-You can find more examples in [planette playground](https://github.com/planette/playground) repository.
+- https://github.com/contributte/playground (playground)
+- https://contributte.org/examples.html (more examples)
