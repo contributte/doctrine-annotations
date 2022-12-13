@@ -4,7 +4,7 @@
   "keywords": ["nettrine", "nette", "doctrine", "annotations"],
   "type": "library",
   "license": "MIT",
-  "homepage": "https://github.com/nettrine/annotations",
+  "homepage": "https://github.com/contributte/doctrine-annotations",
   "authors": [
     {
       "name": "Milan Felix Šulc",

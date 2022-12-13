@@ -1,4 +1,4 @@
-# Nettrine Annotations
+# Contributte Doctrine Annotations
 
 [Doctrine/Annotations](https://www.doctrine-project.org/projects/annotations.html) for Nette Framework.
 
@@ -37,7 +37,7 @@ Take advantage of empowering this package with 1 extra package:
 
 ### `doctrine/cache`
 
-This package can be enhanced with `doctrine/cache`, use prepared [nettrine/cache](https://github.com/nettrine/cache) integration.
+This package can be enhanced with `doctrine/cache`, use prepared [nettrine/cache](https://github.com/contributte/doctrine-cache) integration.
 
 ```bash
 composer require nettrine/cache
@@ -69,7 +69,7 @@ nettrine.annotations:
   cache: Doctrine\Common\Cache\PhpFileCache(%tempDir%/cache/doctrine)
 ```
 
-You may omit the `cache` key using [nettrine/cache](https://github.com/nettrine/cache) to setup cache.
+You may omit the `cache` key using [nettrine/cache](https://github.com/contributte/doctrine-cache) to setup cache. It's configured automatically.
 
 ```yaml
 nettrine.annotations:

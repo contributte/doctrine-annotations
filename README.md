@@ -1,14 +1,14 @@
-![](https://heatbadger.now.sh/github/readme/nettrine/annotations/)
+![](https://heatbadger.now.sh/github/readme/contributte/doctrine-annotations/)
 
 <p align=center>
-  <a href="https://github.com/nettrine/annotations/actions"><img src="https://badgen.net/github/checks/nettrine/annotations/master?annotations=300"></a>
+  <a href="https://github.com/contributte/doctrine-annotations/actions"><img src="https://badgen.net/github/checks/nettrine/annotations/master?annotations=300"></a>
   <a href="https://coveralls.io/r/nettrine/annotations"><img src="https://badgen.net/coveralls/c/github/nettrine/annotations?annotations=300"></a>
   <a href="https://packagist.org/packages/nettrine/annotations"><img src="https://badgen.net/packagist/dm/nettrine/annotations"></a>
   <a href="https://packagist.org/packages/nettrine/annotations"><img src="https://badgen.net/packagist/v/nettrine/annotations"></a>
 </p>
 <p align=center>
   <a href="https://packagist.org/packages/nettrine/annotations"><img src="https://badgen.net/packagist/php/nettrine/annotations"></a>
-  <a href="https://github.com/nettrine/annotations"><img src="https://badgen.net/github/license/nettrine/annotations"></a>
+  <a href="https://github.com/contributte/doctrine-annotations"><img src="https://badgen.net/github/license/contributte/doctrine-annotations"></a>
   <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
   <a href="https://bit.ly/cttfo"><img src="https://badgen.net/badge/support/forum/yellow"></a>
   <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
