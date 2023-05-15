@@ -78,7 +78,7 @@ final class AnnotationsExtensionTest extends TestCase
 
 			$container = new $class();
 			Assert::true($container instanceof Container);
-		}, InvalidStateException::class, 'Service \'annotations.reader\' (type of Doctrine\Common\Annotations\Reader): Service of type \'Doctrine\Common\Cache\Cache\' not found.');
+		}, InvalidStateException::class, "Service 'annotations.reader' (type of Doctrine\Common\Annotations\Reader): Service of type Doctrine\Common\Cache\Cache not found. Did you add it to configuration file?");
 	}
 
 }
