@@ -11,8 +11,7 @@ use Doctrine\Common\Annotations\Annotation;
 class SampleAnnotation
 {
 
-	/** @var string|NULL */
-	private $value;
+	private string|null $value;
 
 	/**
 	 * @param string[] $values
