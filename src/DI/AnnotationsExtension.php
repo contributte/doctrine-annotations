@@ -11,7 +11,7 @@ use Doctrine\Common\Cache\Cache;
 use Nette\DI\Definitions\Definition;
 use Nette\DI\Definitions\Statement;
 use Nette\PhpGenerator\ClassType;
-use Nette\PhpGenerator\PhpLiteral;
+use Nette\PhpGenerator\Literal;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use stdClass;
@@ -81,8 +81,8 @@ class AnnotationsExtension extends CompilerExtension
 	public function afterCompile(ClassType $classType): void
 	{
 		$initialize = $classType->getMethod('initialize');
-		$original = (string) $initialize->getBody();
-		$initialize->setBody('?::registerUniqueLoader("class_exists");' . "\n", [new PhpLiteral(AnnotationRegistry::class)]);
+		$original = $initialize->getBody();
+		$initialize->setBody('?::registerUniqueLoader("class_exists");' . "\n", [new Literal(AnnotationRegistry::class)]);
 		$initialize->addBody($original);
 	}
 
