@@ -18,12 +18,9 @@
     "nettrine/cache": "^0.3.0"
   },
   "require-dev": {
-    "ninjify/nunjuck": "^0.4",
-    "ninjify/qa": "^0.13",
-    "phpstan/phpstan": "^0.12.0",
-    "phpstan/phpstan-deprecation-rules": "^0.12.0",
-    "phpstan/phpstan-nette": "^0.12.0",
-    "phpstan/phpstan-strict-rules": "^0.12.0"
+    "contributte/qa": "^0.4",
+    "contributte/tester": "^0.3",
+    "contributte/phpstan": "^0.1"
   },
   "autoload": {
     "psr-4": {
