@@ -2,13 +2,12 @@
 
 namespace Nettrine\Annotations\DI;
 
-use Contributte\DI\Extension\CompilerExtension;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
-use Nette\DI\Definitions\Definition;
+use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\Statement;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Literal;
@@ -38,9 +37,6 @@ class AnnotationsExtension extends CompilerExtension
 		]);
 	}
 
-	/**
-	 * Register services
-	 */
 	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
@@ -56,13 +52,9 @@ class AnnotationsExtension extends CompilerExtension
 		}
 
 		if ($config->cache !== null) {
-			$cacheName = $this->prefix('cache');
-			$cacheDefinition = $this->getHelper()->getDefinitionFromConfig($config->cache, $cacheName);
-
-			// If service is extension specific, then disable autowiring
-			if ($cacheDefinition instanceof Definition && $cacheDefinition->getName() === $cacheName) {
-				$cacheDefinition->setAutowired(false);
-			}
+			$cacheDefinition = $builder->addDefinition($this->prefix('cache'));
+			$cacheDefinition->setFactory($config->cache)
+				->setAutowired(false);
 		} else {
 			$cacheDefinition = '@' . Cache::class;
 		}
