@@ -4,7 +4,7 @@ namespace Nettrine\Annotations\DI;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Doctrine\Common\Annotations\CachedReader;
+use Doctrine\Common\Annotations\PsrCachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use Nette\DI\CompilerExtension;
@@ -61,13 +61,11 @@ class AnnotationsExtension extends CompilerExtension
 
 		$builder->addDefinition($this->prefix('reader'))
 			->setType(Reader::class)
-			->setFactory(CachedReader::class, [
+			->setFactory(PsrCachedReader::class, [
 				$readerDefinition,
 				$cacheDefinition,
 				$config->debug,
 			]);
-
-		AnnotationRegistry::registerUniqueLoader('class_exists');
 	}
 
 	public function afterCompile(ClassType $classType): void
