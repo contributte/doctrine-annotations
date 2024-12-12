@@ -5,15 +5,13 @@ namespace Tests\Cases\DI;
 use Contributte\Tester\Environment;
 use Contributte\Tester\Utils\ContainerBuilder;
 use Contributte\Tester\Utils\Neonkit;
-use Doctrine\Common\Annotations\CachedReader;
+use Doctrine\Common\Annotations\PsrCachedReader;
 use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Cache\ApcuCache;
-use Doctrine\Common\Cache\Cache;
-use Doctrine\Common\Cache\PhpFileCache;
 use Nette\DI\Compiler;
 use Nette\InvalidStateException;
 use Nettrine\Annotations\DI\AnnotationsExtension;
-use Nettrine\Cache\DI\CacheExtension;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Tester\Assert;
 use Tester\TestCase;
 
@@ -27,18 +25,20 @@ final class AnnotationsExtensionTest extends TestCase
 		$container = ContainerBuilder::of()
 			->withCompiler(function (Compiler $compiler): void {
 				$compiler->addExtension('annotations', new AnnotationsExtension());
-				$compiler->addExtension('cache', new CacheExtension());
 				$compiler->addConfig([
 					'parameters' => [
 						'tempDir' => Environment::getTestDir(),
+					],
+					'annotations' => [
+						'cache' => PhpFilesAdapter::class, // Use PSR-6 cache
 					],
 				]);
 				$compiler->addDependencies([__FILE__]);
 			})
 			->build();
 
-		Assert::type(CachedReader::class, $container->getByType(Reader::class));
-		Assert::type(PhpFileCache::class, $container->getService('cache.driver'));
+		Assert::type(PsrCachedReader::class, $container->getByType(Reader::class));
+		Assert::type(PhpFilesAdapter::class, $container->getService('annotations.cache'));
 	}
 
 	public function testProvidedCache(): void
@@ -47,16 +47,15 @@ final class AnnotationsExtensionTest extends TestCase
 			->withCompiler(function (Compiler $compiler): void {
 				$compiler->addExtension('annotations', new AnnotationsExtension());
 				$compiler->addConfig(Neonkit::load('
-					annotations:
-						cache: Doctrine\Common\Cache\ApcuCache
-				'));
+                    annotations:
+                        cache: Symfony\Component\Cache\Adapter\ArrayAdapter
+                '));
 				$compiler->addDependencies([__FILE__]);
 			})
 			->build();
 
-		Assert::type(CachedReader::class, $container->getByType(Reader::class));
-		Assert::type(ApcuCache::class, $container->getService('annotations.cache'));
-		Assert::null($container->getByType(Cache::class, false));
+		Assert::type(PsrCachedReader::class, $container->getByType(Reader::class));
+		Assert::type(ArrayAdapter::class, $container->getService('annotations.cache'));
 	}
 
 	public function testNoCache(): void

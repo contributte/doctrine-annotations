@@ -20,7 +20,8 @@
   "require-dev": {
     "contributte/phpstan": "^0.1",
     "contributte/qa": "^0.4",
-    "contributte/tester": "^0.3"
+    "contributte/tester": "^0.3",
+    "symfony/cache": "^7.2"
   },
   "autoload": {
     "psr-4": {

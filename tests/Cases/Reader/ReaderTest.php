@@ -4,11 +4,11 @@ namespace Tests\Cases\Reader;
 
 use Contributte\Tester\Environment;
 use Contributte\Tester\Utils\ContainerBuilder;
-use Contributte\Tester\Utils\Neonkit;
 use Doctrine\Common\Annotations\Reader;
 use Nette\DI\Compiler;
 use Nettrine\Annotations\DI\AnnotationsExtension;
 use ReflectionClass;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Tester\Assert;
 use Tester\TestCase;
 use Tests\Fixtures\SampleAnnotation;
@@ -25,12 +25,15 @@ final class ReaderTest extends TestCase
 			->withCompiler(function (Compiler $compiler): void {
 				$compiler->addExtension('annotations', new AnnotationsExtension());
 				$compiler->addConfig(['parameters' => ['tempDir' => Environment::getTestDir()]]);
-				$compiler->addConfig(Neonkit::load('
-					annotations:
-						cache: Doctrine\Common\Cache\FilesystemCache(%tempDir%/nettrine.annotations)
-						ignore:
-							- ignoredAnnotation
-				'));
+				$compiler->addConfig([
+					'parameters' => [
+						'tempDir' => Environment::getTestDir(),
+					],
+					'annotations' => [
+						'cache' => FilesystemAdapter::class,
+						'ignore' => ['ignoredAnnotation'],
+					],
+				]);
 				$compiler->addDependencies([__FILE__]);
 			})
 			->build();
