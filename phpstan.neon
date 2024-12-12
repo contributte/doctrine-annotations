@@ -16,6 +16,3 @@ parameters:
 		- .docs
 
 	ignoreErrors:
-		# No replacement available
-		- '#Call to deprecated method registerUniqueLoader\(\) of class Doctrine\\Common\\Annotations\\AnnotationRegistry.#'
-		- '#Fetching class constant class of deprecated class Doctrine\\Common\\Annotations\\CachedReader#'
