@@ -13,15 +13,15 @@
   ],
   "require": {
     "php": ">=8.2",
-    "nette/di": "^3.1.2",
-    "doctrine/annotations": "^2.0",
-    "nettrine/cache": "^0.4.0 || ^0.5.0"
+    "nette/di": "^3.2.4",
+    "doctrine/annotations": "^2.0.2",
+    "nettrine/cache": "^0.5.0 || ^0.6.0"
   },
   "require-dev": {
     "contributte/phpstan": "^0.2",
     "contributte/qa": "^0.4",
     "contributte/tester": "^0.3",
-    "symfony/cache": "^7.2"
+    "symfony/cache": "^7.2.1"
   },
   "autoload": {
     "psr-4": {
