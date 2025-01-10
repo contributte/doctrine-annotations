@@ -3,14 +3,11 @@
 namespace Nettrine\Annotations\DI;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\PsrCachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\Statement;
-use Nette\PhpGenerator\ClassType;
-use Nette\PhpGenerator\Literal;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use stdClass;
@@ -42,12 +39,12 @@ class AnnotationsExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 		$config = $this->config;
 
-		$readerDefinition = $builder->addDefinition($this->prefix('delegatedReader'))
+		$annotationReaderDef = $builder->addDefinition($this->prefix('annotationReader'))
 			->setFactory(AnnotationReader::class)
 			->setAutowired(false);
 
 		foreach ($config->ignore as $annotationName) {
-			$readerDefinition->addSetup('addGlobalIgnoredName', [$annotationName]);
+			$annotationReaderDef->addSetup('addGlobalIgnoredName', [$annotationName]);
 			AnnotationReader::addGlobalIgnoredName($annotationName);
 		}
 
@@ -62,18 +59,10 @@ class AnnotationsExtension extends CompilerExtension
 		$builder->addDefinition($this->prefix('reader'))
 			->setType(Reader::class)
 			->setFactory(PsrCachedReader::class, [
-				$readerDefinition,
+				$annotationReaderDef,
 				$cacheDefinition,
 				$config->debug,
 			]);
-	}
-
-	public function afterCompile(ClassType $classType): void
-	{
-		$initialize = $classType->getMethod('initialize');
-		$original = $initialize->getBody();
-		$initialize->setBody('?::registerUniqueLoader("class_exists");' . "\n", [new Literal(AnnotationRegistry::class)]);
-		$initialize->addBody($original);
 	}
 
 }
