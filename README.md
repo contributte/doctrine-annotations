@@ -2,7 +2,7 @@
 
 <p align=center>
   <a href="https://github.com/contributte/doctrine-annotations/actions"><img src="https://badgen.net/github/checks/nettrine/annotations/master?annotations=300"></a>
-  <a href="https://coveralls.io/r/nettrine/annotations"><img src="https://badgen.net/coveralls/c/github/nettrine/annotations?annotations=300"></a>
+  <a href="https://codecov.io/gh/contributte/doctrine-annotations"><img src="https://badgen.net/codecov/c/github/contributte/doctrine-annotations?cache=300"></a>
   <a href="https://packagist.org/packages/nettrine/annotations"><img src="https://badgen.net/packagist/dm/nettrine/annotations"></a>
   <a href="https://packagist.org/packages/nettrine/annotations"><img src="https://badgen.net/packagist/v/nettrine/annotations"></a>
 </p>
@@ -52,4 +52,3 @@ This package is currently maintaining by these authors.
 
 Consider to [support](https://contributte.org/partners.html) **contributte** development team.
 Also thank you for using this package.
-
